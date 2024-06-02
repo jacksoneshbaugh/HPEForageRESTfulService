@@ -14,10 +14,10 @@ public class EmployeeManager {
     private static final Employees employees = new Employees();
 
     static {
-        employees.getEmployees().add(new Employee(0, "Bob", "Smith", "CEO", "bob.smith@company.com"));
-        employees.getEmployees().add(new Employee(1, "Alice", "Smith", "COO", "alice.smith@company.com"));
-        employees.getEmployees().add(new Employee(2, "Tyler", "Paul", "Software Engineer", "tyler.paul@company.com"));
-        employees.getEmployees().add(new Employee(3, "Martin", "Luther", "Reformist and Theologian", "martin.luther@company.com"));
+        employees.getEmployees().add(new Employee("0", "Bob", "Smith", "CEO", "bob.smith@company.com"));
+        employees.getEmployees().add(new Employee("1", "Alice", "Smith", "COO", "alice.smith@company.com"));
+        employees.getEmployees().add(new Employee("2", "Tyler", "Paul", "Software Engineer", "tyler.paul@company.com"));
+        employees.getEmployees().add(new Employee("3", "Martin", "Luther", "Reformist and Theologian", "martin.luther@company.com"));
     }
 
     public EmployeeManager() { }
