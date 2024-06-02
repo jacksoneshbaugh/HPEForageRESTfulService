@@ -1,7 +1,12 @@
 package com.example.restservice;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import java.net.URI;
 
 /**
  * A controller with domain over all things related to employees.
@@ -30,14 +35,16 @@ public class EmployeeController {
      * @param employee the employee to be added to the list
      * @return a response indicating success or failure.
      */
-    @PostMapping(path = {"", "/"}, produces = "application/json")
-    public String createEmployee(@RequestBody Employee employee) {
+    @PostMapping(path = {"", "/"}, consumes = "application/json", produces = "application/json")
+    public ResponseEntity<Object> createEmployee(@RequestBody Employee employee) {
 
         if(employeeManager.getAllEmployees().getEmployees().contains(employee))
-            return "{ \"response\": \"400\"," + "\"message\": \"Employee was not added successfully, because an employee with this ID already exists.\" }";
+            return ResponseEntity.badRequest().build();
+
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(employee.getId()).toUri();
 
         employeeManager.addEmployee(employee);
-        return "{ \"response\": \"201\"," + "\"message\": \"Employee was added successfully.\" }";
+        return ResponseEntity.created(location).build();
     }
 
 }
